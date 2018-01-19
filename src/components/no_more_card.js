@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
   user_pic_style: {
     width: size(75),
     height: size(75),
-    borderRadius: 32,
+    borderRadius: size(150) / 2,
     resizeMode: 'contain',
     marginBottom: size(30),
   },

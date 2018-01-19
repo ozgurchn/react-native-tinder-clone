@@ -63,9 +63,11 @@ export default class Profile extends Component {
         </View>  
         <View style={styles.footer}>
           <ProfileSwiper /> 
-          <TouchableOpacity style={styles.tinder_plus_button_style}>
-            <Text style={styles.tinder_button_text_style}>TİNDER PLUS'IM</Text>
-          </TouchableOpacity>
+          <View style={styles.tinder_plus_button_container}>
+            <TouchableOpacity style={styles.tinder_plus_button_style}>
+              <Text style={styles.tinder_button_text_style}>TİNDER PLUS'IM</Text>
+            </TouchableOpacity>
+          </View>
         </View>
       </View>
     );
@@ -163,7 +165,10 @@ const styles = StyleSheet.create({
   footer: {
     marginTop: size(100), 
     height: size(200),
-    justifyContent: 'center',
+  },
+  tinder_plus_button_container: {
+    width: Statics.DEVICE_WIDTH, 
+    justifyContent: 'center', 
     alignItems: 'center',
   },
   tinder_plus_button_style: {

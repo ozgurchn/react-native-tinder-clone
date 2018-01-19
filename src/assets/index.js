@@ -1,5 +1,5 @@
 export const Tinder = require('./tinder.png');
-export const User = require('./user.png');
+export const User = require('./user_alternative.png');
 export const Message = require('./message.png');
 export const BackgroundLayer = require('./layerson2.png');
 
