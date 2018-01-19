@@ -10,7 +10,9 @@
     "react": "16.0.0",
     "react-native": "^0.51.0",
     "react-native-interactable": "^0.1.7",
-    "react-native-navigation": "latest"
+    "react-native-navigation": "latest",
+    "react-native-scrollable-tab-view": "^0.8.0",
+    "react-native-swiper": "^1.5.13"
   },
   "devDependencies": {
     "babel-jest": "22.1.0",

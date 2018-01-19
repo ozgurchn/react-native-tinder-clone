@@ -1,11 +1,11 @@
 import { Navigation } from 'react-native-navigation';
 import { View } from 'react-native';
 import App from '../../App';
-/* import {
+import {
   Home,
   Profile,
   Chat,
-} from '../views'; */
+} from '../views';
 
 export const ROUTES = {
 	App: {
