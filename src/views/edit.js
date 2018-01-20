@@ -4,12 +4,20 @@ import {
   View,
   Text,
 } from 'react-native';
+import { Header } from '../components';
 
 export default class Edit extends Component {
+  static navigatorStyle = {
+		navBarHidden: true,
+  }
+
   render() {
     return (
       <View style={styles.container}>
-        <Text>Olaaa</Text>
+        <Header 
+          title={'Edit'}
+          leftButton={() => this.props.navigator.pop()} 
+        />
       </View>
     );
   }

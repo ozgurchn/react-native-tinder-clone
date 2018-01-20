@@ -35,9 +35,9 @@ export default class App extends Component {
         locked
         initialPage={1}
       >
-        <Profile tabLabel={User} />
-        <Home tabLabel={Tinder} />
-        <Chat tabLabel={Message} />
+        <Profile tabLabel={User} navigator={this.props.navigator} />
+        <Home tabLabel={Tinder} navigator={this.props.navigator} />
+        <Chat tabLabel={Message} navigator={this.props.navigator} />
       </ScrollableTabView>
     );
   }

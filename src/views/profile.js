@@ -27,7 +27,7 @@ export default class Profile extends Component {
         <View style={styles.navigation_inner_container}>
           <TouchableOpacity 
             style={styles.button_container}
-            onPress={() => alert('setting pressed')}
+            onPress={() => this.props.navigator.push({screen: 'Settings'})}
           >
             <Image source={Setting} style={styles.button_style}/>
           </TouchableOpacity>
@@ -39,7 +39,7 @@ export default class Profile extends Component {
         <View style={styles.navigation_inner_container}>
           <TouchableOpacity 
             style={styles.button_container}
-            onPress={() => alert('edit pressed')}
+            onPress={() => this.props.navigator.push({screen: 'Edit'})}
           >
             <Image source={Edit} style={styles.button_style} /> 
           </TouchableOpacity>
