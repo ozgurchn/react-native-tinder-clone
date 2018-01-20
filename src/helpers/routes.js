@@ -5,6 +5,8 @@ import {
   Home,
   Profile,
   Chat,
+  Settings,
+  Edit,
 } from '../views';
 
 export const ROUTES = {
@@ -12,13 +14,19 @@ export const ROUTES = {
 		component: () => App,
   },
   Home: {
-    component: () => View,
+    component: () => Home,
   },
   Chat: {
-    component: () => View,
+    component: () => Chat,
   },
   Profile: {
-    component: () => View,
+    component: () => Profile,
+  },
+  Settings: {
+    component: () => Settings,
+  },
+  Edit: {
+    component: () => Edit,
   },
 	
 };
