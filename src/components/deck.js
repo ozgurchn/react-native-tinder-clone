@@ -6,7 +6,6 @@ import {
   Animated,
   Text,
   TouchableOpacity,
-  PanResponder,
   LayoutAnimation,
   UIManager,
   Dimensions,
@@ -35,30 +34,12 @@ export default class Deck2 extends Component {
   constructor(props) {
     super(props);
     const position = new Animated.Value(0);
+
     if (Platform.OS === 'android') {
       UIManager.setLayoutAnimationEnabledExperimental && UIManager.setLayoutAnimationEnabledExperimental(true);
     }
-    const panResponder = PanResponder.create({
-      onStartShouldSetPanResponder: () => true,
-      onPanResponderMove: (event, gesture) => {
-        position.setValue({x: gesture.dx, y: gesture.dy });
-      },
-      onPanResponderRelease: (event, gesture) => {
-        if (gesture.dx > SWIPE_THRESHOLD) {
-          this.forceSwipe('right');
-        } else if (gesture.dx < -SWIPE_THRESHOLD) {
-          this.forceSwipe('left');
-        } else {
-          this.resetPosition();
-        }
-      }
-    });
 
-    this.state = { panResponder, position, index: 0, isDone: false }
-  }
-
-  componentWillUpdate() {
-    
+    this.state = {position, index: 0, isDone: false }
   }
 
   componentWillReceiveProps(props) {
@@ -135,7 +116,6 @@ export default class Deck2 extends Component {
               ref = {'test'}
               style={[styles.cardStyle, androidStyle]}
               key={item.id}
-              horizontalOnly={true}
               snapPoints={[
                 {x: 390},
                 {x: 0, damping: 0.7},

@@ -88,7 +88,7 @@ const styles = StyleSheet.create({
   profile_pic_style: {
     width: size(120),
     height: size(120),
-    borderRadius: 120 / 2,
+    borderRadius: size(120) / 2,
   },
   profile_name_style: {
     fontSize: size(20),
