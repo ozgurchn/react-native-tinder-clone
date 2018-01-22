@@ -10,6 +10,7 @@ import {
   Platform,
   Switch,
   Slider,
+  Animated,
 } from 'react-native';
 import { Header, Box } from '../components';
 import { Tinder, Boost, SuperLike } from '../assets';
@@ -27,6 +28,9 @@ const CustomLayoutAnimation = {
   },
 };
 
+const NAVBAR_HEIGHT = 80;
+const STATUS_BAR_HEIGHT = Platform.select({ ios: 10, android: 14 });
+
 export default class Settings extends Component {
   static navigatorStyle = {
 		navBarHidden: true,
@@ -34,15 +38,55 @@ export default class Settings extends Component {
 
   constructor (props) {
     super(props);
+    const scrollAnim = new Animated.Value(0);
+    const offsetAnim = new Animated.Value(0);
+
     this.state = {
       male: true,
       female: false,
       distance: 2,
       age: 19,
+      scrollAnim,
+      offsetAnim,
+      clampedScroll: Animated.diffClamp(
+        Animated.add(
+          scrollAnim.interpolate({
+            inputRange: [0, 1],
+            outputRange: [0, 1],
+            extrapolateLeft: 'clamp',
+          }),
+          offsetAnim,
+        ),
+        0,
+        NAVBAR_HEIGHT - STATUS_BAR_HEIGHT,
+      ),
     }
     if (Platform.OS === 'android') {
       UIManager.setLayoutAnimationEnabledExperimental && UIManager.setLayoutAnimationEnabledExperimental(true);
     }
+  }
+
+  _clampedScrollValue = 0;
+  _offsetValue = 0;
+  _scrollValue = 0;
+
+  componentDidMount() {
+    this.state.scrollAnim.addListener(({ value }) => {
+      const diff = value - this._scrollValue;
+      this._scrollValue = value;
+      this._clampedScrollValue = Math.min(
+        Math.max(this._clampedScrollValue + diff, 0),
+        NAVBAR_HEIGHT - STATUS_BAR_HEIGHT,
+      );
+    });
+    this.state.offsetAnim.addListener(({ value }) => {
+      this._offsetValue = value;
+    });
+  }
+
+  componentWillUnmount() {
+    this.state.scrollAnim.removeAllListeners();
+    this.state.offsetAnim.removeAllListeners();
   }
 
   componentWillUpdate() {
@@ -199,21 +243,68 @@ export default class Settings extends Component {
     });
   }
 
+  _onScrollEndDrag = () => {
+    this._scrollEndTimer = setTimeout(this._onMomentumScrollEnd, 250);
+  };
+
+  _onMomentumScrollBegin = () => {
+    clearTimeout(this._scrollEndTimer);
+  };
+
+  _onMomentumScrollEnd = () => {
+    const toValue = this._scrollValue > NAVBAR_HEIGHT &&
+      this._clampedScrollValue > (NAVBAR_HEIGHT - STATUS_BAR_HEIGHT) / 2
+      ? this._offsetValue + NAVBAR_HEIGHT
+      : this._offsetValue - NAVBAR_HEIGHT;
+
+    Animated.timing(this.state.offsetAnim, {
+      toValue,
+      duration: 350,
+      useNativeDriver: true,
+    }).start();
+  };
+
   render() {
+    const { clampedScroll } = this.state;
+
+    const navbarTranslate = clampedScroll.interpolate({
+      inputRange: [0, NAVBAR_HEIGHT - STATUS_BAR_HEIGHT],
+      outputRange: [0, - (NAVBAR_HEIGHT - STATUS_BAR_HEIGHT)],
+      extrapolate: 'clamp',
+    });
+    const navbarOpacity = clampedScroll.interpolate({
+      inputRange: [0, NAVBAR_HEIGHT - STATUS_BAR_HEIGHT],
+      outputRange: [1, 0],
+      extrapolate: 'clamp',
+    });
+
     return (
       <View style={styles.container}>
-        <Header 
-          title={'Settings'}
-          leftButton={() => this.props.navigator.pop()} 
-        />
-        <ScrollView showsVerticalScrollIndicator={false}>
+        <Animated.ScrollView 
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={styles.contentContainer}
+          scrollEventThrottle={1}
+          onScroll={Animated.event(
+            [{ nativeEvent: { contentOffset: { y: this.state.scrollAnim } } }],
+            { useNativeDriver: true },
+          )}
+          onMomentumScrollBegin={this._onMomentumScrollBegin}
+          onMomentumScrollEnd={this._onMomentumScrollEnd}
+          onScrollEndDrag={this._onScrollEndDrag}
+        >
           {this.renderPremiumFeatureContainer()}
           {this.renderTitleContainer('Keşfet Ayarları')}
           {this.renderLocationContainer()}
           {this.renderShowMeContainer()}
           {this.renderDistanceContainer()}
           {this.renderAgeContainer()}
-        </ScrollView>
+        </Animated.ScrollView>
+        <Animated.View style={[styles.navbar, { transform: [{ translateY: navbarTranslate }] }]}>
+          <Header 
+            title={'Settings'}
+            leftButton={() => this.props.navigator.pop()} 
+          />
+        </Animated.View>
       </View>
     );
   }
@@ -223,6 +314,15 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: 'rgb(244,246,251)',
+  },
+  contentContainer: {
+    paddingTop: size(75),
+  },
+  navbar: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
   },
   //------------PREMIUM FEATURE-------------//
   boost_super_like_container: {
