@@ -4,14 +4,49 @@ import {
   View,
   Text,
   Image,
+  ScrollView,
+  LayoutAnimation,
+  UIManager,
+  Platform,
+  Switch,
+  Slider,
 } from 'react-native';
 import { Header, Box } from '../components';
 import { Tinder, Boost, SuperLike } from '../assets';
 import { size } from '../helpers/devices';
 
+const CustomLayoutAnimation = {
+  duration: 500,
+  create: {
+    type: LayoutAnimation.Types.spring,
+    property: LayoutAnimation.Properties.opacity,
+  },
+  update: {
+    type: LayoutAnimation.Types.spring,
+    springDamping: 0.5,
+  },
+};
+
 export default class Settings extends Component {
   static navigatorStyle = {
 		navBarHidden: true,
+  }
+
+  constructor (props) {
+    super(props);
+    this.state = {
+      male: true,
+      female: false,
+      distance: 2,
+      age: 19,
+    }
+    if (Platform.OS === 'android') {
+      UIManager.setLayoutAnimationEnabledExperimental && UIManager.setLayoutAnimationEnabledExperimental(true);
+    }
+  }
+
+  componentWillUpdate() {
+    LayoutAnimation.configureNext(CustomLayoutAnimation);
   }
 
   renderPremiumFeatureContainer() {
@@ -71,6 +106,99 @@ export default class Settings extends Component {
     );
   }
 
+  renderShowMeContainer() {
+    const male = this.state.male ? 'Erkekler' : '';
+    const female = this.state.female ? 'Kadınlar' : '';
+    return (
+      <View style={styles.show_me_container}>
+        <Box style={styles.show_me_inner_container}>
+          <View style={styles.show_me_title_container}>
+            <Text style={styles.show_me_text}>Bana Göster</Text>
+            <Text style={styles.gender_text}>{`${male} ${female}`}</Text>
+          </View>
+          <View style={styles.show_me_settings_container}>
+            <View style={styles.show_me_row_container}>
+              <Text>Erkekler</Text>
+              <Switch
+                onValueChange={(value) => this.onGenderChange('male', value)}
+                value={this.state.male}
+                onTintColor={'rgb(253,77,55)'}
+              />
+            </View>
+            <View style={styles.show_me_row_container}>
+              <Text>Kadınlar</Text>
+              <Switch
+                onValueChange={(value) => this.onGenderChange('female', value)}
+                value={this.state.female}
+                onTintColor={'rgb(253,77,55)'}
+              />
+            </View>
+          </View>
+        </Box>
+      </View>
+    );
+  }
+
+  renderDistanceContainer() {
+    return (
+      <View style={styles.distance_container}>
+        <Box>
+          <View style={styles.show_me_title_container}>
+            <Text style={styles.show_me_text}>Azami Mesafe</Text>
+            <Text style={styles.gender_text}>{this.state.distance}km.</Text>
+          </View>
+          <View style={styles.show_me_settings_container}>
+            <View style={styles.show_me_row_container}>
+              <Slider
+                style={{flex: 1}}
+                step={1}
+                minimumValue={2}
+                maximumValue={161}
+                value={this.state.distance}
+                onValueChange={val => this.setState({ distance: val })}
+                thumbTintColor={'black'}
+                minimumTrackTintColor={'rgb(253,77,55)'}
+              />
+            </View>
+          </View>
+        </Box>
+      </View>
+    )
+  }
+
+  renderAgeContainer() {
+    return (
+      <View style={styles.age_container}>
+        <Box>
+          <View style={styles.show_me_title_container}>
+            <Text style={styles.show_me_text}>Yaş Aralığı</Text>
+            <Text style={styles.gender_text}>19 - {this.state.age}</Text>
+          </View>
+          <View style={styles.show_me_settings_container}>
+            <View style={styles.show_me_row_container}>
+              <Slider
+                style={{flex: 1}}
+                step={1}
+                minimumValue={19}
+                maximumValue={55}
+                value={this.state.age}
+                onValueChange={val => this.setState({ age: val })}
+                thumbTintColor={'black'}
+                minimumTrackTintColor={'rgb(253,77,55)'}
+              />
+            </View>
+          </View>
+        </Box>
+      </View>
+    );
+  }
+
+  onGenderChange(type, value) {
+    this.setState({
+      [type]: value,
+    });
+  }
+
   render() {
     return (
       <View style={styles.container}>
@@ -78,9 +206,14 @@ export default class Settings extends Component {
           title={'Settings'}
           leftButton={() => this.props.navigator.pop()} 
         />
-        {this.renderPremiumFeatureContainer()}
-        {this.renderTitleContainer('Keşfet Ayarları')}
-        {this.renderLocationContainer()}
+        <ScrollView showsVerticalScrollIndicator={false}>
+          {this.renderPremiumFeatureContainer()}
+          {this.renderTitleContainer('Keşfet Ayarları')}
+          {this.renderLocationContainer()}
+          {this.renderShowMeContainer()}
+          {this.renderDistanceContainer()}
+          {this.renderAgeContainer()}
+        </ScrollView>
       </View>
     );
   }
@@ -189,5 +322,41 @@ const styles = StyleSheet.create({
     fontSize: size(14),
     color: 'rgba(0,0,0,0.5)',
     marginHorizontal: size(7),
-  }
+  },
+  //--------------------SHOW ME CONTAINER----------------//
+  show_me_container: {
+    margin: size(10),
+  },
+  show_me_title_container: {
+    flexDirection: 'row', 
+    justifyContent: 'space-between',
+  },
+  gender_text: {
+    fontSize: size(18),
+    fontWeight: '600',
+  },
+  show_me_text: {
+    fontSize: size(18),
+    fontWeight: '600',
+    color: 'rgb(253,77,55)',
+  },
+  show_me_settings_container: { 
+    marginTop: size(10),
+  },
+  show_me_row_container: {
+    flexDirection: 'row', 
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginVertical: size(10),
+  },
+  //----------------------DISCTANCE CONTAINER--------------------//
+  distance_container: {
+    marginHorizontal: size(10),
+    marginVertical: size(5),
+  },
+  //----------------------AGE CONTAINER-------------------------//
+  age_container: {
+    marginHorizontal: size(10),
+    marginVertical: size(5),
+  },
 });

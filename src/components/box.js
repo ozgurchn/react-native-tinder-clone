@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {
   StyleSheet,
   View,
+  TouchableOpacity
 } from 'react-native';
 import { size } from '../helpers/devices';
 
@@ -10,23 +11,28 @@ export default class Box extends Component {
   static propTypes = {
     style: PropTypes.object,
     centered: PropTypes.bool,
+    onPress: PropTypes.func,
 	}
 
 	static defaultProps = {
     style: {},
     centered: false,
+    onPress: () => {},
   }
 
   render() {
-    const { style, centered } = this.props;
+    const { style, centered, onPress } = this.props;
     const centeredStyle = centered ? 
       { justifyContent: 'center', alignItems: 'center' } : 
       { justifyContent: 'flex-start',};
 
     return (
-      <View style={[styles.container, centeredStyle, style]}>
+      <TouchableOpacity 
+        style={[styles.container, centeredStyle, style]}
+        onPress={onPress}
+      >
         {this.props.children}
-      </View>
+      </TouchableOpacity>
     );
   }
 }
