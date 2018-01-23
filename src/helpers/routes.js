@@ -7,6 +7,7 @@ import {
   Chat,
   Settings,
   Edit,
+  ChatDetail,
 } from '../views';
 
 export const ROUTES = {
@@ -27,6 +28,9 @@ export const ROUTES = {
   },
   Edit: {
     component: () => Edit,
+  },
+  ChatDetail: {
+    component: () => ChatDetail,
   },
 	
 };

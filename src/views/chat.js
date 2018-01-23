@@ -5,6 +5,7 @@ import {
   Text,
   TextInput,
   Image,
+  TouchableOpacity,
 } from 'react-native';
 import { Search } from '../assets';
 import { size } from '../helpers/devices';
@@ -78,10 +79,14 @@ export default class Chat extends Component {
         <View style={styles.message_person_container}>
         {Messages.map((person) => {
             return (
-              <View key={person.id} style={styles.messsage_person}>
+              <TouchableOpacity 
+                key={person.id} 
+                style={styles.messsage_person}
+                onPress={() => this.props.navigator.push({screen: 'ChatDetail', passProps: { data: person }})}
+              >
                 <Image source={{uri: person.profilePic}} style={styles.messsage_person_image_style}/>
                 <Text style={styles.message_person_name_style}>{person.name}</Text>
-              </View>
+              </TouchableOpacity>
             );
           })}
         </View>

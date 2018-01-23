@@ -63,17 +63,25 @@ export default class Header extends Component {
   }
 
   renderTitle(title) {
-    return (
-      <View style={styles.title_container}>
-        <Text 
-          style={styles.title_text}
-          numberOfLines={ 1 } 
-          ellipsizeMode={ 'tail' }
-        >
-          {title}
-        </Text>
-      </View>
-    )
+    if (this.props.title !== '') {
+      return (
+        <View style={styles.title_container}>
+          <Text 
+            style={styles.title_text}
+            numberOfLines={ 1 } 
+            ellipsizeMode={ 'tail' }
+          >
+            {title}
+          </Text>
+        </View>
+      )
+    } else {
+      return (
+        <View style={styles.title_container}>
+          {this.props.renderTitleComponent}
+        </View>
+      )
+    }
   }
 
   render() {
