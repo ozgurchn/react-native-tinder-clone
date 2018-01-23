@@ -24,6 +24,7 @@ export default class ChatDetail extends Component {
     }
   }
 
+
   renderHeaderTitleContainer(data) {
     return (
       <View style={styles.header_title_container}>
@@ -34,18 +35,32 @@ export default class ChatDetail extends Component {
   }
 
   renderChatContainer() {
-    return (
-      <View style={styles.message_container}>
-        {this.state.messages.map((message) => {
-          return (
-            <View key={message.id} style={styles.message_row}>
-              <Text style={styles.message_text_style}>{message.messageText}</Text>
-            </View>
-          );
-        })
-        }
-      </View>
-    );
+    const { messages } = this.state;
+    const { name, profilePic } = this.props.data;
+
+    if (messages.length < 1) {
+      return(
+        <View style={styles.empty_state_container}>
+          <Text style={styles.empty_state_title_style}><Text style={{fontWeight: '600'}}>{name}</Text> ile eşleştin</Text>
+          <Text style={styles.empty_state_date_style}>30 Nis 2017</Text>
+          <Image source={{uri: profilePic}} style={styles.empty_state_image_style} />
+          <Text style={styles.empty_state_text_style}>Fotoğraflar hakkında güzel bir şeyler söyle</Text>
+        </View>
+      );
+    } else {
+      return (
+        <View style={styles.message_container}>
+          {this.state.messages.map((message) => {
+            return (
+              <View key={message.id} style={styles.message_row}>
+                <Text style={styles.message_text_style}>{message.messageText}</Text>
+              </View>
+            );
+          })
+          }
+        </View>
+      );
+    } 
   }
 
   onMessageInputChange(value) {
@@ -172,4 +187,24 @@ const styles = StyleSheet.create({
     color: 'white',
     marginLeft: size(5),
   },
+  //--------------------EMPTY STATE-------------------//
+  empty_state_container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  empty_state_title_style: {
+    fontSize: size(18),
+    marginBottom: size(5),
+  },
+  empty_state_date_style: {
+    color: 'rgba(0,0,0,0.6)',
+  },
+  empty_state_image_style: {
+    width: size(150),
+    height: size(150),
+    borderRadius: size(150) / 2,
+    marginVertical: size(50),
+
+  }
 });

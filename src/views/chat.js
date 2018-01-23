@@ -61,10 +61,14 @@ export default class Chat extends Component {
         <View style={styles.matches_container}>
           {newMatches.map((person) => {
             return (
-              <View key={person.id} style={styles.person_container}>
+              <TouchableOpacity 
+                key={person.id} 
+                style={styles.person_container}
+                onPress={() => this.props.navigator.push({screen: 'ChatDetail', passProps: { data: person }})}
+              >
                 <Image source={{uri: person.profilePic}} style={styles.person_image_style}/>
                 <Text style={styles.person_name_style}>{person.name}</Text>
-              </View>
+              </TouchableOpacity >
             );
           })}
         </View>
