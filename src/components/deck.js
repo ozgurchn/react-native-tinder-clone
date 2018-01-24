@@ -6,8 +6,6 @@ import {
   Animated,
   Text,
   TouchableOpacity,
-  LayoutAnimation,
-  UIManager,
   Dimensions,
   Platform,
 } from 'react-native';
@@ -16,6 +14,8 @@ import  BottomTabBar  from './bottom_tab_bar';
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SWIPE_THRESHOLD = 0.75 * SCREEN_WIDTH;
+
+const transformValue = Platform.select({ ios: '10deg', android: '5deg' });
 
 export default class Deck2 extends Component {
   static propTypes = {
@@ -34,11 +34,6 @@ export default class Deck2 extends Component {
   constructor(props) {
     super(props);
     const position = new Animated.Value(0);
-
-    if (Platform.OS === 'android') {
-      UIManager.setLayoutAnimationEnabledExperimental && UIManager.setLayoutAnimationEnabledExperimental(true);
-    }
-
     this.state = {position, index: 0, isDone: false }
   }
 
@@ -50,14 +45,6 @@ export default class Deck2 extends Component {
     }
   }
 
-  forceSwipe(direction) {
-    const x = direction === 'right' ? SCREEN_WIDTH : -SCREEN_WIDTH;
-    Animated.timing(this.state.position, {
-      toValue: x,
-      duration: 550
-    }).start(() => this.onSwipeComplete(direction));
-  }
-
   onSwipeComplete(direction) {
     if (this.state.index <= this.props.data.length - 1) {
       if (direction === 'right') {
@@ -66,12 +53,6 @@ export default class Deck2 extends Component {
         this.refs.test.snapTo({index: 2})
       }
     }
-  }
-
-  resetPosition() {
-    Animated.spring(this.state.position, {
-      toValue: {x: 0, y: 0}
-    }).start();
   }
 
   controlCardLeaving(event) {
@@ -128,8 +109,8 @@ export default class Deck2 extends Component {
               <Animated.View key={item.id} style={[{}, {
                 transform: [{
                   rotate: this.state.position.interpolate({
-                    inputRange: [-250, 0, 250],
-                    outputRange: ['10deg', '0deg', '-10deg']
+                    inputRange: [-300, 0, 300],
+                    outputRange: [transformValue, '0deg', `-${transformValue}`]
                   })
                 }]
               }]}>
@@ -166,8 +147,6 @@ export default class Deck2 extends Component {
               key={item.id}
               horizontalOnly={false}
               animatedValueX={this.state.position}
-              onAlert={(event) => this.controlCardLeaving(event.nativeEvent)}
-              alertAreas={[{id: 'right', influenceArea: {left: SWIPE_THRESHOLD}}, {id: 'left', influenceArea: {right:-SWIPE_THRESHOLD}}]}
             >
             <View key={item.id} style={[styles.cardStyle, androidStyle]}>
               {this.props.renderCard(item)}
