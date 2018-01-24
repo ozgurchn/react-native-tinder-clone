@@ -25,10 +25,6 @@ export default class ChatDetail extends Component {
     }
   }
 
-  componentWillMount() {
-    console.log('PROPS', this.props);
-  }
-
   renderHeaderTitleContainer(data) {
     return (
       <View style={styles.header_title_container}>
@@ -78,11 +74,15 @@ export default class ChatDetail extends Component {
       id: this.state.id,
       messageText: this.state.messageText,
     };
-    this.setState({
-      messages: [...this.state.messages, obj],
-      id: this.state.id + 1,
-      messageText: '',
-    });
+    if (this.state.messageText !== '') {
+      this.setState({
+        messages: [...this.state.messages, obj],
+        id: this.state.id + 1,
+        messageText: '',
+      });
+    } else {
+      alert('say something.')
+    }
   }
 
   popToScreen() {

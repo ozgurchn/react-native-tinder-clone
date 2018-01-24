@@ -13,6 +13,9 @@ import { Header, Collapsable } from '../components';
 import { size } from '../helpers/devices';
 import * as Statics from '../helpers/statics';
 
+const BigPictureWidth = Platform.select({ ios: 1.5, android: 1.6 });
+const PictureWidth = Platform.select({ ios: 3, android: 3.2 });
+
 export default class Edit extends Component {
   static navigatorStyle = {
 		navBarHidden: true,
@@ -205,14 +208,14 @@ const styles = StyleSheet.create({
     flex: 1.5,
   },
   big_picture_style: {
-    width:  size(Statics.DEVICE_WIDTH / 1.6),
-    height: size(Statics.DEVICE_WIDTH / 1.6)  + size(10),
+    width:  size(Statics.DEVICE_WIDTH / BigPictureWidth),
+    height: size(Statics.DEVICE_WIDTH / BigPictureWidth)  + size(10),
     borderRadius: size(5),
     overflow: 'hidden',
   },
   picture_style: {
-    width:  size(Statics.DEVICE_WIDTH / 3.2),
-    height: size(Statics.DEVICE_WIDTH / 3.2),
+    width:  size(Statics.DEVICE_WIDTH / PictureWidth),
+    height: size(Statics.DEVICE_WIDTH / PictureWidth),
     borderRadius: size(5),
     overflow: 'hidden',
     marginVertical: size(5),
@@ -221,8 +224,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#e1e3e8',
     borderWidth: 1,
     borderColor: '#c6c6c6',
-    width:  size(Statics.DEVICE_WIDTH / 3.2),
-    height: size(Statics.DEVICE_WIDTH / 3.2),
+    width:  size(Statics.DEVICE_WIDTH / PictureWidth),
+    height: size(Statics.DEVICE_WIDTH / PictureWidth),
     borderRadius: size(5),
     overflow: 'hidden',
     marginRight: size(5),

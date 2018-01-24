@@ -137,23 +137,23 @@ export default class Deck2 extends Component {
                   <Animated.View style={[styles.overlay_nope, {
                     opacity: this.state.position.interpolate({
                       inputRange: [-120, 0],
-                      outputRange: [0.6, 0],
+                      outputRange: [0.8, 0],
                       extrapolateLeft: 'clamp',
                       extrapolateRight: 'clamp'
                     })
                   }]}>
-                    <Text style={[styles.overlayText, {color: '#de6d77'}]}>Trash</Text>
+                    <Text style={[styles.overlayText, {color: '#de6d77', borderColor: '#de6d77'}]}>Nope</Text>
                   </Animated.View>
 
                   <Animated.View style={[styles.overlay, {
                     opacity: this.state.position.interpolate({
                       inputRange: [0, 120],
-                      outputRange: [0, 0.6],
+                      outputRange: [0, 0.8],
                       extrapolateLeft: 'clamp',
                       extrapolateRight: 'clamp'
                     })
                   }]}>
-                    <Text style={[styles.overlayText, {color: '#2f9a5d'}]}>Keep</Text>
+                    <Text style={[styles.overlayText, {color: '#2f9a5d', borderColor: '#2f9a5d'}]}>Like</Text>
                   </Animated.View>
                   {this.props.renderCard(item)}
               </Animated.View>
@@ -219,28 +219,32 @@ const styles = StyleSheet.create({
   overlay: {
     position: 'absolute',
     bottom: 180,
-    left: 120,
-    right: 12,
-    top: 0,
-    justifyContent: 'flex-end',
-    alignItems: 'center',
+    left: 25,
+    right: 0,
+    top: 30,
+    justifyContent: 'flex-start',
+    alignItems: 'flex-start',
     elevation: 100,
     zIndex: 100,
   },
   overlay_nope: {
     position: 'absolute',
-    bottom: 180,
-    left: 12,
-    right: 120,
-    top: 0,
-    justifyContent: 'flex-end',
-    alignItems: 'center',
+    bottom: 0,
+    left: 0,
+    right: 25,
+    top: 30,
+    justifyContent: 'flex-start',
+    alignItems: 'flex-end',
     elevation: 100,
     zIndex: 100,
   },
   overlayText: {
-    fontSize: 60,
-    color: 'white'
+    fontSize: 40,
+    color: 'white',
+    fontWeight: '600',
+    padding: 3,
+    borderWidth: 1,
+    backgroundColor: 'transparent',
   },
   buttons_container: {
     flexDirection: 'row',
