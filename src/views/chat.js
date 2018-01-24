@@ -6,6 +6,7 @@ import {
   TextInput,
   Image,
   TouchableOpacity,
+  Platform,
 } from 'react-native';
 import { Search } from '../assets';
 import { size } from '../helpers/devices';
@@ -37,6 +38,15 @@ export default class Chat extends Component {
     });
   }
 
+  pushToScreen(screenName, person) {
+    console.log('props', person);
+    if(Platform.OS === 'ios') {
+      this.props.navigator.push({screen: screenName, passProps: person})
+    } else {
+      this.props.navigator.showModal({screen: screenName , passProps: person, animationType: 'slide-up'})
+    }
+  }
+
   renderSearchContainer() {
 		return (
 			<View style={ styles.text_input_container }>
@@ -64,7 +74,7 @@ export default class Chat extends Component {
               <TouchableOpacity 
                 key={person.id} 
                 style={styles.person_container}
-                onPress={() => this.props.navigator.push({screen: 'ChatDetail', passProps: { data: person }})}
+                onPress={() => this.pushToScreen('ChatDetail', { data: person } )}
               >
                 <Image source={{uri: person.profilePic}} style={styles.person_image_style}/>
                 <Text style={styles.person_name_style}>{person.name}</Text>
@@ -86,7 +96,7 @@ export default class Chat extends Component {
               <TouchableOpacity 
                 key={person.id} 
                 style={styles.messsage_person}
-                onPress={() => this.props.navigator.push({screen: 'ChatDetail', passProps: { data: person }})}
+                onPress={() => this.pushToScreen('ChatDetail', { data: person })}
               >
                 <Image source={{uri: person.profilePic}} style={styles.messsage_person_image_style}/>
                 <Text style={styles.message_person_name_style}>{person.name}</Text>

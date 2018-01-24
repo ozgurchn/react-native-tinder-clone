@@ -5,6 +5,7 @@ import {
   Text,
   TouchableOpacity,
   Image,
+  Platform,
 } from 'react-native';
 import { size } from '../helpers/devices';
 import * as Statics from '../helpers/statics';
@@ -12,6 +13,28 @@ import { Setting, Edit } from '../assets';
 import ProfileSwiper from '../components/profile_swiper';
 
 export default class Profile extends Component {
+
+  constructor(props) {
+    super(props);
+    this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent.bind(this));
+    this.state = {
+      visible: true
+    }
+  }
+
+  onNavigatorEvent(event) {
+    if (event.id === 'willAppear') {
+      this.setState({
+        visible: true
+      });
+    }
+    if (event.id === 'willDisappear') {
+      this.setState({
+        visible: false
+      });
+    }
+  }
+  
   renderProfilePicContainer() {
     return (
       <View style={styles.profile_pic_container}>
@@ -21,13 +44,21 @@ export default class Profile extends Component {
     )
   }
 
+  pushToScreen(screenName) {
+    if(Platform.OS === 'ios') {
+      this.props.navigator.push({screen: screenName})
+    } else {
+      this.props.navigator.showModal({screen: screenName ,animationType: 'slide-up'})
+    }
+  }
+
   renderNavigationContainer() {
     return (
       <View style={styles.navigation_container}>
         <View style={styles.navigation_inner_container}>
           <TouchableOpacity 
             style={styles.button_container}
-            onPress={() => this.props.navigator.push({screen: 'Settings'})}
+            onPress={() => this.pushToScreen('Settings')}
           >
             <Image source={Setting} style={styles.button_style}/>
           </TouchableOpacity>
@@ -39,7 +70,7 @@ export default class Profile extends Component {
         <View style={styles.navigation_inner_container}>
           <TouchableOpacity 
             style={styles.button_container}
-            onPress={() => this.props.navigator.push({screen: 'Edit'})}
+            onPress={() => this.pushToScreen('Edit')}
           >
             <Image source={Edit} style={styles.button_style} /> 
           </TouchableOpacity>

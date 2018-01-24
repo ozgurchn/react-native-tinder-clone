@@ -225,6 +225,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
     alignItems: 'center',
     elevation: 100,
+    zIndex: 100,
   },
   overlay_nope: {
     position: 'absolute',
@@ -235,6 +236,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
     alignItems: 'center',
     elevation: 100,
+    zIndex: 100,
   },
   overlayText: {
     fontSize: 60,

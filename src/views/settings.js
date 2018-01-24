@@ -122,7 +122,9 @@ export default class Settings extends Component {
               <Switch
                 onValueChange={(value) => this.onGenderChange('male', value)}
                 value={this.state.male}
-                onTintColor={'rgb(253,77,55)'}
+                onTintColor={'rgb(247,196,198)'}
+                thumbTintColor={this.state.male ? 'rgb(229,74,80)' : 'rgb(232,232,232)'}
+                
               />
             </View>
             <View style={styles.show_me_row_container}>
@@ -130,7 +132,9 @@ export default class Settings extends Component {
               <Switch
                 onValueChange={(value) => this.onGenderChange('female', value)}
                 value={this.state.female}
-                onTintColor={'rgb(253,77,55)'}
+                onTintColor={'rgb(247,196,198)'}
+                thumbTintColor={this.state.female ? 'rgb(229,74,80)' : 'rgb(232,232,232)'}
+                
               />
             </View>
           </View>
@@ -156,7 +160,7 @@ export default class Settings extends Component {
                 maximumValue={161}
                 value={this.state.distance}
                 onValueChange={val => this.setState({ distance: val })}
-                thumbTintColor={'black'}
+                thumbTintColor={'rgb(229,74,80)'}
                 minimumTrackTintColor={'rgb(253,77,55)'}
               />
             </View>
@@ -183,7 +187,7 @@ export default class Settings extends Component {
                 maximumValue={55}
                 value={this.state.age}
                 onValueChange={val => this.setState({ age: val })}
-                thumbTintColor={'black'}
+                thumbTintColor={'rgb(229,74,80)'}
                 minimumTrackTintColor={'rgb(253,77,55)'}
               />
             </View>
@@ -199,6 +203,14 @@ export default class Settings extends Component {
     });
   }
 
+  popToScreen() {
+    if(Platform.OS === 'ios') {
+      this.props.navigator.pop();
+    } else {
+      this.props.navigator.dismissModal({animationType: 'slide-down'})
+    }
+  }
+
   render() {
     return (
       <View style={styles.container}>
@@ -206,7 +218,7 @@ export default class Settings extends Component {
           renderHeader={
             <Header 
               title={'Settings'}
-              leftButton={() => this.props.navigator.pop()} 
+              leftButton={() => this.popToScreen()} 
             />
           }
         >

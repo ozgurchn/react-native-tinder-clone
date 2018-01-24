@@ -9,7 +9,7 @@ import { size } from '../helpers/devices';
 
 export default class Box extends Component {
   static propTypes = {
-    style: PropTypes.object,
+    style: PropTypes.any,
     centered: PropTypes.bool,
     onPress: PropTypes.func,
 	}

@@ -5,6 +5,7 @@ import {
   Text,
   Image,
   TextInput,
+  Platform,
 } from 'react-native';
 import { Header } from '../components';
 import { size } from '../helpers/devices';
@@ -24,6 +25,9 @@ export default class ChatDetail extends Component {
     }
   }
 
+  componentWillMount() {
+    console.log('PROPS', this.props);
+  }
 
   renderHeaderTitleContainer(data) {
     return (
@@ -81,12 +85,20 @@ export default class ChatDetail extends Component {
     });
   }
 
+  popToScreen() {
+    if(Platform.OS === 'ios') {
+      this.props.navigator.pop();
+    } else {
+      this.props.navigator.dismissModal({animationType: 'slide-down'})
+    }
+  }
+
   render() {
     return (
       <View style={styles.container}>
         <Header 
           renderTitleComponent={this.renderHeaderTitleContainer(this.props.data)}
-          leftButton={() => this.props.navigator.pop()} 
+          leftButton={() => this.popToScreen()} 
         />
         <View style={styles.inner_container}>
           {this.renderChatContainer()}

@@ -4,6 +4,7 @@ import {
   View,
   Text,
   Image,
+  Platform,
 } from 'react-native';
 import { size } from '../helpers/devices';
 
@@ -30,7 +31,7 @@ const styles = StyleSheet.create({
   user_pic_style: {
     width: size(75),
     height: size(75),
-    borderRadius: size(75) / 2,
+    borderRadius: Platform.OS === 'ios' ? size(75) / 2 : size(150) / 2,
     resizeMode: 'contain',
     marginBottom: size(30),
   },

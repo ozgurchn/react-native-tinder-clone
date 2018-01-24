@@ -24,7 +24,23 @@ export default class App extends Component {
   
   constructor(props) {
     super(props);
-    this.state={}
+    this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent.bind(this));
+    this.state = {
+      visible: true
+    }
+  }
+
+  onNavigatorEvent(event) {
+    if (event.id === 'willAppear') {
+      this.setState({
+        visible: true
+      });
+    }
+    if (event.id === 'willDisappear') {
+      this.setState({
+        visible: false
+      });
+    }
   }
 
   render() {
@@ -34,6 +50,7 @@ export default class App extends Component {
         renderTabBar={ () => <CustomTabBar /> }
         locked
         initialPage={1}
+        style={{flex: this.state.visible ? 1 : 0}}
       >
         <Profile tabLabel={User} navigator={this.props.navigator} />
         <Home tabLabel={Tinder} navigator={this.props.navigator} />

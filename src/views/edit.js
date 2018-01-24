@@ -7,6 +7,7 @@ import {
   Switch,
   TextInput,
   TouchableOpacity,
+  Platform,
 } from 'react-native';
 import { Header, Collapsable } from '../components';
 import { size } from '../helpers/devices';
@@ -93,7 +94,8 @@ export default class Edit extends Component {
           <Switch
             onValueChange={(value) => this.setState({smartPhotos: !this.state.smartPhotos})}
             value={this.state.smartPhotos}
-            onTintColor={'rgb(253,77,55)'}
+            onTintColor={'rgb(247,196,198)'}
+            thumbTintColor={this.state.smartPhotos ? 'rgb(229,74,80)' : 'rgb(232,232,232)'}
           />
         </View>
         <Text style={styles.smart_photo_subtitle_style}>Akıllı Fotoğraflar, profil fotoğraflarını sürekli olarak test ederek ilk görünmesini en uygun olanı seçer.</Text>
@@ -151,6 +153,14 @@ export default class Edit extends Component {
     )
   }
 
+  popToScreen() {
+    if(Platform.OS === 'ios') {
+      this.props.navigator.pop();
+    } else {
+      this.props.navigator.dismissModal({animationType: 'slide-down'})
+    }
+  }
+
   render() {
     return (
       <View style={styles.container}>
@@ -158,7 +168,7 @@ export default class Edit extends Component {
           renderHeader={
             <Header 
               title={'Edit'}
-              leftButton={() => this.props.navigator.pop()} 
+              leftButton={() => this.popToScreen()} 
             />
           }
         >
@@ -195,14 +205,14 @@ const styles = StyleSheet.create({
     flex: 1.5,
   },
   big_picture_style: {
-    width:  size(Statics.DEVICE_WIDTH / 1.5),
-    height: size(Statics.DEVICE_WIDTH / 1.5)  + size(10),
+    width:  size(Statics.DEVICE_WIDTH / 1.6),
+    height: size(Statics.DEVICE_WIDTH / 1.6)  + size(10),
     borderRadius: size(5),
     overflow: 'hidden',
   },
   picture_style: {
-    width:  size(Statics.DEVICE_WIDTH / 3),
-    height: size(Statics.DEVICE_WIDTH / 3),
+    width:  size(Statics.DEVICE_WIDTH / 3.2),
+    height: size(Statics.DEVICE_WIDTH / 3.2),
     borderRadius: size(5),
     overflow: 'hidden',
     marginVertical: size(5),
@@ -211,8 +221,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#e1e3e8',
     borderWidth: 1,
     borderColor: '#c6c6c6',
-    width:  size(Statics.DEVICE_WIDTH / 3),
-    height: size(Statics.DEVICE_WIDTH / 3),
+    width:  size(Statics.DEVICE_WIDTH / 3.2),
+    height: size(Statics.DEVICE_WIDTH / 3.2),
     borderRadius: size(5),
     overflow: 'hidden',
     marginRight: size(5),

@@ -10,7 +10,7 @@ import {
 import { size } from '../helpers/devices';
 
 const NAVBAR_HEIGHT = 80;
-const STATUS_BAR_HEIGHT = Platform.select({ ios: 10, android: 14 });
+const STATUS_BAR_HEIGHT = Platform.select({ ios: 10, android: 1 });
 
 export default class Collapsible extends Component {
   constructor (props) {
