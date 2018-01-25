@@ -1,5 +1,5 @@
 # React Native Tinder Clone
 
-![](https://gfycat.com/ifr/GrossCheeryApisdorsatalaboriosa)
+![](https://thumbs.gfycat.com/GrossCheeryApisdorsatalaboriosa-size_restricted.gif)
 ![alt text](https://gfycat.com/GrossCheeryApisdorsatalaboriosa)
 
