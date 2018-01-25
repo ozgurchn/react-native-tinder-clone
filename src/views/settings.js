@@ -58,7 +58,7 @@ export default class Settings extends Component {
             <Text style={styles.tinder_title_style}>tinder</Text>
             <Text style={styles.tinder_gold_style}>GOLD</Text>
           </View>
-          <Text style={styles.tinder_subtitle_style}>En Ayrıcalıklı Özelliklerimize Sahip Ol</Text>
+          <Text style={styles.tinder_subtitle_style}>Unlock Our Most Exclusive Features</Text>
         </Box>
         <Box centered>
           <View style={styles.tinder_box_container}>
@@ -66,20 +66,20 @@ export default class Settings extends Component {
             <Text style={styles.tinder_title_style}>tinder</Text>
             <Text style={styles.tinder_plus_style}>+</Text>
           </View>
-          <Text style={styles.tinder_subtitle_style}>Sınırsız Beğeni ve Daha Fazlası</Text>
+          <Text style={styles.tinder_subtitle_style}>Unlimited Likes & More!</Text>
         </Box>
         <View style={styles.boost_super_like_container}>
           <Box style={{flex: 1}} centered>
             <View style={styles.boost_super_like_icon_container}>
               <Image source={Boost} style={styles.tinder_alt_icon_style} />
             </View>
-            <Text style={styles.boost_text_style}>Boost Satın Al</Text>
+            <Text style={styles.boost_text_style}>Get Boosts</Text>
           </Box>
           <Box style={{flex: 1}} centered>
             <View style={styles.boost_super_like_icon_container}>
               <Image source={SuperLike} style={styles.tinder_alt_icon_style} />
             </View>
-            <Text style={styles.super_like_text_style}>Super Like Satın Al</Text>
+            <Text style={styles.super_like_text_style}>Get Super Likes</Text>
           </Box>
         </View>
       </View>
@@ -98,27 +98,27 @@ export default class Settings extends Component {
     return (
       <View style={styles.location_container}>
         <Box style={styles.location_inner_container}>
-          <Text>Şurada kaydırılıyor:</Text>
-          <Text style={styles.location_text}>Şu Anki Yerim</Text>
+          <Text>Swiping in:</Text>
+          <Text style={styles.location_text}>My Current Location</Text>
         </Box>
-        <Text style={styles.location_subtext}>Diğer şehirlerdeki Tinder üyelerini görmek için kayrdırma konumunu değiştirin</Text>
+        <Text style={styles.location_subtext}>Change your swipe location to see Tinder members in other cities.</Text>
       </View>
     );
   }
 
   renderShowMeContainer() {
-    const male = this.state.male ? 'Erkekler' : '';
-    const female = this.state.female ? 'Kadınlar' : '';
+    const male = this.state.male ? 'Men' : '';
+    const female = this.state.female ? 'Women' : '';
     return (
       <View style={styles.show_me_container}>
         <Box style={styles.show_me_inner_container}>
           <View style={styles.show_me_title_container}>
-            <Text style={styles.show_me_text}>Bana Göster</Text>
+            <Text style={styles.show_me_text}>Show Me</Text>
             <Text style={styles.gender_text}>{`${male} ${female}`}</Text>
           </View>
           <View style={styles.show_me_settings_container}>
             <View style={styles.show_me_row_container}>
-              <Text>Erkekler</Text>
+              <Text>Men</Text>
               <Switch
                 onValueChange={(value) => this.onGenderChange('male', value)}
                 value={this.state.male}
@@ -128,7 +128,7 @@ export default class Settings extends Component {
               />
             </View>
             <View style={styles.show_me_row_container}>
-              <Text>Kadınlar</Text>
+              <Text>Women</Text>
               <Switch
                 onValueChange={(value) => this.onGenderChange('female', value)}
                 value={this.state.female}
@@ -148,7 +148,7 @@ export default class Settings extends Component {
       <View style={styles.distance_container}>
         <Box>
           <View style={styles.show_me_title_container}>
-            <Text style={styles.show_me_text}>Azami Mesafe</Text>
+            <Text style={styles.show_me_text}>Maximum Distance</Text>
             <Text style={styles.gender_text}>{this.state.distance}km.</Text>
           </View>
           <View style={styles.show_me_settings_container}>
@@ -175,7 +175,7 @@ export default class Settings extends Component {
       <View style={styles.age_container}>
         <Box>
           <View style={styles.show_me_title_container}>
-            <Text style={styles.show_me_text}>Yaş Aralığı</Text>
+            <Text style={styles.show_me_text}>Age Range</Text>
             <Text style={styles.gender_text}>19 - {this.state.age}</Text>
           </View>
           <View style={styles.show_me_settings_container}>
@@ -223,7 +223,7 @@ export default class Settings extends Component {
           }
         >
           {this.renderPremiumFeatureContainer()}
-          {this.renderTitleContainer('Keşfet Ayarları')}
+          {this.renderTitleContainer('Discovery Settings')}
           {this.renderLocationContainer()}
           {this.renderShowMeContainer()}
           {this.renderDistanceContainer()}
@@ -263,7 +263,7 @@ const styles = StyleSheet.create({
   tinder_subtitle_style: {
     fontSize: size(14),
     fontWeight: '400',
-    color: '#363636',
+    color: 'rgba(0,0,0,0.5)',
   },
   tinder_gold_style: {
     marginLeft: size(5),

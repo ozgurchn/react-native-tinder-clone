@@ -93,7 +93,7 @@ export default class Edit extends Component {
     return (
       <View>
         <View style={styles.smart_photos_container}>
-          <Text style={styles.smart_photo_title_style}>Akıllı Fotoğraflar</Text>
+          <Text style={styles.smart_photo_title_style}>Smart Photos</Text>
           <Switch
             onValueChange={(value) => this.setState({smartPhotos: !this.state.smartPhotos})}
             value={this.state.smartPhotos}
@@ -101,7 +101,7 @@ export default class Edit extends Component {
             thumbTintColor={this.state.smartPhotos ? 'rgb(229,74,80)' : 'rgb(232,232,232)'}
           />
         </View>
-        <Text style={styles.smart_photo_subtitle_style}>Akıllı Fotoğraflar, profil fotoğraflarını sürekli olarak test ederek ilk görünmesini en uygun olanı seçer.</Text>
+        <Text style={styles.smart_photo_subtitle_style}>Smart Photos continuously tests all your profile photos and picks the best one to show first.</Text>
       </View>
     )
   }
@@ -109,7 +109,7 @@ export default class Edit extends Component {
   renderWhoIsContainer(name) {
     return (
       <View style={{marginBottom: size(10)}}>
-        <Text style={styles.who_is_title_text}>Kim bu {name}</Text>
+        <Text style={styles.who_is_title_text}>About {name}</Text>
         <View style={styles.who_is_textinput_container}>
           <TextInput
             style={styles.multi_text_input_filed}
@@ -131,12 +131,12 @@ export default class Edit extends Component {
   renderJobContainer(name) {
     return (
       <View style={{marginBottom: size(10)}}>
-        <Text style={styles.who_is_title_text}>Mevcut İş</Text>
+        <Text style={styles.who_is_title_text}>Current Work</Text>
         <TouchableOpacity 
           style={styles.who_is_textinput_container}
           onPress={() => alert('pressed')}
         >
-          <Text>İşi Seç</Text>
+          <Text>Select Work</Text>
         </TouchableOpacity>
       </View>
     )
@@ -145,12 +145,12 @@ export default class Edit extends Component {
   renderSchoolContainer(name) {
     return (
       <View style={{marginBottom: size(10)}}>
-        <Text style={styles.who_is_title_text}>Okul</Text>
+        <Text style={styles.who_is_title_text}>School</Text>
         <TouchableOpacity 
           style={styles.who_is_textinput_container}
           onPress={() => alert('pressed')}
         >
-          <Text>Okul Seç</Text>
+          <Text>Select School</Text>
         </TouchableOpacity>
       </View>
     )

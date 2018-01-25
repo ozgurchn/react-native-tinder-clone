@@ -16,7 +16,7 @@ export default class NoMoreCard extends Component {
           source={{uri: 'https://avatars0.githubusercontent.com/u/7205900?s=400&v=4'}} 
           style={styles.user_pic_style}
         />
-        <Text style={styles.empty_state_text_style}>Yakınlarınızda yeni biri yok.</Text>
+        <Text style={styles.empty_state_text_style}>There's no one new around you.</Text>
       </View>
     )
   }
@@ -38,6 +38,6 @@ const styles = StyleSheet.create({
   empty_state_text_style: {
     fontSize: size(18),
     fontWeight: '500',
-    color: 'gray',
+    color: 'rgba(0,0,0,0.3)',
   }
 });

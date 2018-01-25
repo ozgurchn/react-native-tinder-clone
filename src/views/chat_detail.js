@@ -41,10 +41,10 @@ export default class ChatDetail extends Component {
     if (messages.length < 1) {
       return(
         <View style={styles.empty_state_container}>
-          <Text style={styles.empty_state_title_style}><Text style={{fontWeight: '600'}}>{name}</Text> ile eşleştin</Text>
-          <Text style={styles.empty_state_date_style}>30 Nis 2017</Text>
+          <Text style={styles.empty_state_title_style}>You matched with <Text style={{fontWeight: '600'}}>{name}</Text></Text>
+          <Text style={styles.empty_state_date_style}>Jan 20, 2018</Text>
           <Image source={{uri: profilePic}} style={styles.empty_state_image_style} />
-          <Text style={styles.empty_state_text_style}>Fotoğraflar hakkında güzel bir şeyler söyle</Text>
+          <Text style={styles.empty_state_text_style}>Over 90% of compliments get a response.</Text>
         </View>
       );
     } else {
@@ -107,7 +107,7 @@ export default class ChatDetail extends Component {
               onChangeText={(value) => this.onMessageInputChange(value)}
               value={this.state.messageText}
               style={ styles.text_input }
-              placeholder={ 'Bir mesaj yaz...' }
+              placeholder={ 'Type a message...' }
               placeholderTextColor={ 'gray' }
               underlineColorAndroid="rgba(0,0,0,0)"
               selectionColor={ 'black' }

@@ -55,7 +55,7 @@ export default class Chat extends Component {
 						onChangeText={(value) => this.onSearchInputChange(value)}
 						value={this.state.searchText}
 						style={ styles.text_input }
-						placeholder={ '3 Eşleşmede Ara' }
+						placeholder={ 'Search 3 Matches' }
 						placeholderTextColor={ 'gray' }
 						underlineColorAndroid="rgba(0,0,0,0)"
 						selectionColor={ 'white' }
@@ -67,7 +67,7 @@ export default class Chat extends Component {
   renderNewMatches() {
     return (
       <View style={styles.new_matches_container}>
-        <Text style={styles.new_matches_title_style}>Yeni Eşleşmeler</Text>
+        <Text style={styles.new_matches_title_style}>New Matches</Text>
         <View style={styles.matches_container}>
           {newMatches.map((person) => {
             return (
@@ -89,7 +89,7 @@ export default class Chat extends Component {
   renderMessages() {
     return (
       <View style={styles.messages_container}>
-        <Text style={styles.messages_title_style}>Mesajlar</Text>
+        <Text style={styles.messages_title_style}>Messages</Text>
         <View style={styles.message_person_container}>
         {Messages.map((person) => {
             return (

@@ -35,44 +35,44 @@ export default class ProfileSwiper extends Component {
           <View style={styles.slide}>
             <View style={styles.title_container}>
               <Image source={Boost} style={styles.icon_style} />
-              <Text style={styles.title_text}>Daha Hızlı Eşleşme Yakala</Text>
+              <Text style={styles.title_text}>Get Matches Faster</Text>
             </View>
             <Text style={styles.text}></Text>
           </View>
           <View style={styles.slide}>
             <View style={styles.title_container}>
               <Image source={SuperLike} style={styles.icon_style}/>
-              <Text style={styles.title_text}>Süper Like İle Ön Plana Çık</Text>
+              <Text style={styles.title_text}>Stand Out With Super Likes</Text>
             </View>
-            <Text style={styles.text}>Eşleşme şansın 3 kat daha fazla!</Text>
+            <Text style={styles.text}>You're 3x more likely to get a match!</Text>
           </View>
           <View style={styles.slide}>
             <View style={styles.title_container}>
               <Image source={MapIcon} style={styles.icon_style}/>
-              <Text style={styles.title_text}>Dünyanın Her Yerinde Kaydır</Text>
+              <Text style={styles.title_text}>Swipe Around The World</Text>
             </View>
-            <Text style={styles.text}>Konumunu değiştiren Pasaport, Tinder Plus'da!</Text>
+            <Text style={styles.text}>Passport to anywhere with Tinder Plus!</Text>
           </View>
           <View style={styles.slide}>
             <View style={styles.title_container}>
               <Image source={Key} style={styles.icon_style} />
-              <Text style={styles.title_text}>Profilinizi Kontrol Edin</Text>
+              <Text style={styles.title_text}>Control Your Profile</Text>
             </View>
-            <Text style={styles.text}>Tinder plus ile profilinin istediğin bölümlerini gizle</Text>
+            <Text style={styles.text}>Limit what others see with Tinder Plus</Text>
           </View>
           <View style={styles.slide}>
             <View style={styles.title_container}>
               <Image source={Rewind} style={[styles.icon_style, {tintColor: 'rgb(250,177,11)'}]}/>
-              <Text style={styles.title_text}>Sağa Kaydırmak İstemiştim</Text>
+              <Text style={styles.title_text}>I Meant to Swipe Right</Text>
             </View>
-            <Text style={styles.text}>Tinder plus ile sınırsız geri alma özelliği kazan!</Text>
+            <Text style={styles.text}>Get unlimited Rewinds with Tinder Plus!</Text>
           </View>
           <View style={styles.slide}>
             <View style={styles.title_container}>
               <Image source={Like} style={styles.icon_style}/>
-              <Text style={styles.title_text}>Eşleşme Şansını Arttır</Text>
+              <Text style={styles.title_text}>Increase Your Chances</Text>
             </View>
-            <Text style={styles.text}>Tinder plus ile sınırsız beğeni hakkı kazan!</Text>
+            <Text style={styles.text}>Get unlimited Likes with Tinder Plus!</Text>
           </View>
         </Swiper>
       );

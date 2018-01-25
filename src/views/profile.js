@@ -96,7 +96,7 @@ export default class Profile extends Component {
           <ProfileSwiper /> 
           <View style={styles.tinder_plus_button_container}>
             <TouchableOpacity style={styles.tinder_plus_button_style}>
-              <Text style={styles.tinder_button_text_style}>TİNDER PLUS'IM</Text>
+              <Text style={styles.tinder_button_text_style}>MY TINDER PLUS</Text>
             </TouchableOpacity>
           </View>
         </View>

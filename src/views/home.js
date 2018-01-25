@@ -49,8 +49,8 @@ export default class Home extends Component {
         <Deck
           data={DATA}
           renderCard={this.renderCard}
-          onSwipeLeft={(item) => console.log('left bro', item)}
-          onSwipeRight={(item) => console.log('right bro', item)}
+          onSwipeLeft={(item) => console.log('left', item)}
+          onSwipeRight={(item) => console.log('right', item)}
           renderNoMoreCards={() => this.renderEmptyState()}
           isStack
         />
