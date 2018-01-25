@@ -28,7 +28,9 @@ export default class App extends Component {
     this.state = {
       visible: true
     }
+    console.disableYellowBox = true;
   }
+
 
   onNavigatorEvent(event) {
     if (event.id === 'willAppear') {

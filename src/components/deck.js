@@ -148,9 +148,9 @@ export default class Deck2 extends Component {
               horizontalOnly={false}
               animatedValueX={this.state.position}
             >
-            <View key={item.id} style={[styles.cardStyle, androidStyle]}>
+            <Animated.View key={item.id} style={[styles.cardStyle, androidStyle]}>
               {this.props.renderCard(item)}
-            </View>
+            </Animated.View>
           </Interactable.View>
         );
       }).reverse();

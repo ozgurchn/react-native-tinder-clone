@@ -13,8 +13,8 @@ import { Header, Collapsable } from '../components';
 import { size } from '../helpers/devices';
 import * as Statics from '../helpers/statics';
 
-const BigPictureWidth = Platform.select({ ios: 1.5, android: 1.6 });
-const PictureWidth = Platform.select({ ios: 3, android: 3.2 });
+const BigPictureWidth = Platform.select({ ios: 1.7, android: 1.6 });
+const PictureWidth = Platform.select({ ios: 3.4, android: 3.2 });
 
 export default class Edit extends Component {
   static navigatorStyle = {
@@ -197,7 +197,7 @@ const styles = StyleSheet.create({
   },
   photo_row: {
     flexDirection: 'row',
-    justifyContent: 'flex-start',
+    justifyContent: 'space-between',
     alignItems: 'center',
     marginTop: size(5),
   },
