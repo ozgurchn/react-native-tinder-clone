@@ -5,3 +5,10 @@
 
 ![](https://thumbs.gfycat.com/GrossCheeryApisdorsatalaboriosa-size_restricted.gif)
 
+## Clone the Repo
+```sh
+git clone https://github.com/ozgurchn/react-native-tinder-clone.git
+cd react-native-tinder-clone 
+npm install
+react-native run-ios | react-native run-android
+```
