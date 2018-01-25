@@ -1,4 +1,5 @@
 ## React Native Tinder Clone
+Front-end clone of the Tinder app with react native.
 
 ## Demo
 <a href="https://gfycat.com/GrossCheeryApisdorsatalaboriosa" target="_blank"><strong>Better resolution</strong></a>
